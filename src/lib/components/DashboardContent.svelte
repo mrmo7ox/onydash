@@ -2,6 +2,18 @@
   import { onMount, tick } from 'svelte';
   import type * as HighchartsType from 'highcharts';
 
+  // --- LOCAL ICON IMPORTS ---
+  import infoIcon from '$lib/assets/info-icon.png';
+  import ofIconSvg from '$lib/assets/of-icon.svg';
+  import plusIcon from '$lib/assets/plus-icon.png';
+  import tipsIcon from '$lib/assets/tips-icon.png';
+  import postsIcon from '$lib/assets/posts-icon.png';
+  import referralsIcon from '$lib/assets/referrals-icon.png';
+  import messagesIcon from '$lib/assets/messages-icon.png';
+  import streamsIcon from '$lib/assets/streams-icon.png';
+  import emptyDataIcon from '$lib/assets/empty-data.png';
+  import peopleIcon from '$lib/assets/people-icon.png';
+
   const defaultVals = {
     sub: 4.56,
     tips: 12.34,
@@ -15,7 +27,7 @@
   const isBrowser = typeof window !== 'undefined';
 
   let vals = $state(isBrowser ? JSON.parse(localStorage.getItem('vals') || 'null') || defaultVals : defaultVals);
-  
+
   let total = $derived(
     vals.sub + vals.tips + vals.posts + vals.ref + vals.msg + vals.streams
   );
@@ -24,6 +36,7 @@
   let chartInstance: HighchartsType.Chart | null = null;
   let chartReady = $state(false);
   let isEarningsDropdownOpen = $state(false);
+  let isDragging = false; // --- DRAG FIX FLAG ---
 
   let activePeriod = $state(isBrowser ? localStorage.getItem('activePeriod') || 'This week' : 'This week');
   let earningsType = $state(isBrowser ? localStorage.getItem('earningsType') || 'Gross earnings' : 'Gross earnings');
@@ -96,6 +109,7 @@
       const year = today.getFullYear();
       const month = today.getMonth();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
+
       for (let i = 1; i <= daysInMonth; i++) {
         dates.push(new Date(year, month, i));
       }
@@ -146,14 +160,16 @@
   function setPeriod(period: string) {
     activePeriod = period;
     localStorage.setItem('activePeriod', period);
-    
+
     if (chartInstance) {
       const dates = getDatesForPeriod(period);
       const categories = formatCategories(dates, period);
       chartInstance.xAxis[0].setCategories(categories);
+
       const title = period === 'This month' 
         ? `Employee sales - ${new Date().toLocaleString('default', { month: 'long' })}` 
         : 'Employee sales';
+
       chartInstance.setTitle({ text: title });
     }
   }
@@ -182,12 +198,11 @@
       const HighchartsModule = await import('highcharts');
       const Highcharts = HighchartsModule.default || HighchartsModule;
 
-      // Attempt to load the draggable module
       try {
         const DraggablePointsModule = await import('highcharts/modules/draggable-points');
         const DraggablePoints = DraggablePointsModule.default || DraggablePointsModule;
         if (typeof DraggablePoints === 'function') {
-          DraggablePoints(Highcharts);
+           DraggablePoints(Highcharts);
         }
       } catch (e) {
         console.warn('Highcharts draggable-points module not found. Run: npm install highcharts', e);
@@ -236,26 +251,27 @@
         plotOptions: {
           series: {
             dragDrop: {
-              draggableY: true, // Enables vertical dragging
+              draggableY: true, 
               dragMinY: 0
             },
             point: {
               events: {
-                // Real-time synchronization during mouse drag
+                // --- DRAG START FIX ---
+                dragStart: function() {
+                  isDragging = true;
+                },
                 drag: function(e) {
                   const point = e.target;
                   const index = point.index;
                   let newVal = e.newValues ? e.newValues.y : point.y;
                   if (newVal < 0) newVal = 0;
-                  
+
                   const currentData = [...currentChartData];
                   currentData[index] = newVal;
                   const newTotal = currentData.reduce((a, b) => a + b, 0);
-                  
-                  // Update the chart's shape memory instantly
+
                   baseDistributions[activePeriod] = currentData;
-                  
-                  // Distribute the new dragged total proportionally to all your inputs
+
                   if (total > 0 && newTotal > 0) {
                     const ratio = newTotal / total;
                     vals.sub = parseFloat((vals.sub * ratio).toFixed(2));
@@ -270,15 +286,16 @@
                     vals.tips = newTotal;
                   }
                 },
-                // Final save to local storage when mouse is released
+                // --- DROP FIX ---
                 drop: function() {
+                  isDragging = false;
                   if (isBrowser) localStorage.setItem('baseDistributions', JSON.stringify(baseDistributions));
                 }
               }
             }
           },
           areaspline: {
-            cursor: 'ns-resize', // Changes mouse to an Up/Down arrow when hovering over points
+            cursor: 'ns-resize',
             fillColor: 'rgba(52, 103, 255, 0.15)',
             lineColor: '#3467FF',
             lineWidth: 4,
@@ -314,12 +331,11 @@
 
   $effect(() => {
     if (chartReady && chartInstance?.series?.[0]) {
-      // Safely fallback to an empty array if Highcharts hasn't populated yData yet
       const current = chartInstance.series[0].yData || [];
-      
-      // Compare to prevent overriding Highcharts while the user is actively dragging
       const changed = currentChartData.some((v, i) => current[i] !== v);
-      if (changed) {
+      
+      // --- APPLY DATA ONLY IF NOT DRAGGING ---
+      if (changed && !isDragging) {
         chartInstance.series[0].setData([...currentChartData], true, false, false);
       }
     }
@@ -334,10 +350,10 @@
           <h4 class="text-base font-medium flex items-end">
             Creator earnings overview
             <button type="button" class="ml-2.5 mb-px">
-              <img src="https://xn--nfloww-vva.com/app/index_files/info-icon.png" alt="" width="15" height="15">
+              <img src={infoIcon} alt="" width="15" height="15">
             </button>
             <span class="text-sm text-[#bbbbbb] ml-[15px]">UTC+01:00</span>
-            <img src="https://xn--nfloww-vva.com/app/index_files/info-icon.png" alt="" width="15" height="15" class="ml-2">
+            <img src={infoIcon} alt="" width="15" height="15" class="ml-2">
           </h4>
           <div class="flex items-center">
             <div class="relative mr-4">
@@ -369,6 +385,7 @@
                 </ul>
               {/if}
             </div>
+            
             <ul class="list-none border border-[#444444] p-1 px-2 inline-flex items-center rounded gap-1">
               {#each ['Yesterday', 'Today', 'This week', 'This month'] as period}
                 <li>
@@ -388,7 +405,7 @@
         <div class="flex flex-wrap">
           <div class="py-5 px-[35px] border-r border-[#464646] w-1/4 last:border-r-0">
             <div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/of-icon.svg" alt="" class="w-11 mb-5">
+              <img src={ofIconSvg} alt="" class="w-11 mb-5">
               <p class="text-xs text-[#1890f1] font-semibold mb-4">Total earnings</p>
               <h5 class="text-[32px] text-[#2d74ff] font-bold">
                 <span class="text-2xl align-top leading-[38px] mr-0.5">$</span>
@@ -409,7 +426,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Subscriptions</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/plus-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={plusIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
             <div class="flex items-center justify-between mb-[55px] last:mb-0">
               <div class="w-[calc(100%-45px)]">
@@ -422,7 +439,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Tips</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/tips-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={tipsIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
           </div>
 
@@ -438,7 +455,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Posts</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/posts-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={postsIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
             <div class="flex items-center justify-between mb-[55px] last:mb-0">
               <div class="w-[calc(100%-45px)]">
@@ -451,7 +468,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Referrals</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/referrals-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={referralsIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
           </div>
 
@@ -467,7 +484,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Messages</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/messages-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={messagesIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
             <div class="flex items-center justify-between mb-[55px] last:mb-0">
               <div class="w-[calc(100%-45px)]">
@@ -480,7 +497,7 @@
                 </h5>
                 <p class="text-[13px] text-[#808080]">Streams</p>
               </div>
-              <img src="https://xn--nfloww-vva.com/app/index_files/streams-icon.png" alt="" class="w-[45px] h-[45px] rounded-full">
+              <img src={streamsIcon} alt="" class="w-[45px] h-[45px] rounded-full">
             </div>
           </div>
         </div>
@@ -494,12 +511,12 @@
         <h4 class="text-base font-medium flex items-end">
           My shifts
           <button type="button" class="ml-2.5 mb-px">
-            <img src="https://xn--nfloww-vva.com/app/index_files/info-icon.png" alt="" width="15" height="15">
+            <img src={infoIcon} alt="" width="15" height="15">
           </button>
         </h4>
       </div>
       <div class="flex items-center justify-center flex-col py-10 flex-grow">
-        <img src="https://xn--nfloww-vva.com/app/index_files/empty-data.png" alt="" class="w-[140px] mb-2.5">
+        <img src={emptyDataIcon} alt="" class="w-[140px] mb-2.5">
         <p class="text-sm text-[#808080]">No data</p>
       </div>
     </div>
@@ -510,7 +527,7 @@
           <h4 class="text-base font-medium flex items-end">
             Current clocked-in employees
             <div class="ml-2.5 mb-px text-white text-sm flex items-center">
-              <img src="https://xn--nfloww-vva.com/app/index_files/people-icon.png" alt="" width="15" height="15" class="mr-1">
+              <img src={peopleIcon} alt="" width="15" height="15" class="mr-1">
               <span 
                 class="outline-none px-1 rounded cursor-text transition-colors duration-150 ease-in-out hover:bg-white/10 focus:bg-[rgba(45,116,255,0.2)] focus:shadow-[0_0_0_1px_rgba(45,116,255,0.5)]" 
                 contenteditable="true" 
@@ -568,12 +585,12 @@
           <h4 class="text-base font-medium flex items-end">
             Scheduled hours
             <button type="button" class="ml-2.5 mb-px">
-              <img src="https://xn--nfloww-vva.com/app/index_files/info-icon.png" alt="" width="15" height="15">
+              <img src={infoIcon} alt="" width="15" height="15">
             </button>
           </h4>
         </div>
         <div class="flex items-center justify-center flex-col py-5">
-          <img src="https://xn--nfloww-vva.com/app/index_files/empty-data.png" alt="" class="w-[100px] mb-2.5">
+          <img src={emptyDataIcon} alt="" class="w-[100px] mb-2.5">
           <p class="text-sm text-[#808080]">No data</p>
         </div>
       </div>

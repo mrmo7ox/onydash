@@ -8,21 +8,21 @@
   // --- STATE ---
   let activeTab = $state(isBrowser ? localStorage.getItem('creator_tab') || 'overview' : 'overview');
   let isNetEarnings = $state(isBrowser ? localStorage.getItem('creator_net') === 'true' : false);
-  
+
   const defaultVals = {
     Subscriptions: 55.60, Tips: 111.00, Posts: 44.40, Messages: 911.00, Referrals: 11.10, Streams: 0.00
   };
+
   let vals = $state(isBrowser ? JSON.parse(localStorage.getItem('creator_vals2') || 'null') || defaultVals : defaultVals);
   let total = $derived(vals.Subscriptions + vals.Tips + vals.Posts + vals.Messages + vals.Referrals + vals.Streams);
   let stats = $state(isBrowser ? JSON.parse(localStorage.getItem('creator_stats') || 'null') || { creators: 0, refunded: 0.00 } : { creators: 0, refunded: 0.00 });
-
   let openMenu = $state<string | null>(null);
+  
   function toggleMenu(menu: string) { openMenu = openMenu === menu ? null : menu; }
 
   // --- DATE PICKER LOGIC ---
   const TODAY = new Date(2026, 5, 28); 
   TODAY.setHours(0,0,0,0);
-
   let startDate = $state<Date | null>(new Date(2026, 5, 21));
   let endDate = $state<Date | null>(new Date(2026, 5, 27));
   let hoverDate = $state<Date | null>(null);
@@ -31,6 +31,7 @@
 
   const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   const shortFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+  
   let formattedStart = $derived(startDate ? formatter.format(startDate) : 'Start Date');
   let formattedEnd = $derived(endDate ? formatter.format(endDate) : 'End Date');
 
@@ -70,8 +71,10 @@
     const firstDay = new Date(year, month, 1).getDay();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
     let days = [];
+    
     for (let i = firstDay - 1; i >= 0; i--) days.push({ date: new Date(year, month - 1, daysInPrevMonth - i), currentMonth: false });
     for (let i = 1; i <= daysInMonth; i++) days.push({ date: new Date(year, month, i), currentMonth: true });
+    
     const remaining = 42 - days.length;
     for (let i = 1; i <= remaining; i++) days.push({ date: new Date(year, month + 1, i), currentMonth: false });
     return days;
@@ -80,8 +83,10 @@
   function selectDate(d: Date) {
     if (d > TODAY) return;
     activePreset = 'Custom';
+
     if (!startDate || (startDate && endDate)) {
-      startDate = d; endDate = null; hoverDate = null;
+      startDate = d; endDate = null;
+      hoverDate = null;
     } else if (startDate && !endDate) {
       if (d < startDate) { endDate = startDate; startDate = d; } 
       else { endDate = d; }
@@ -120,7 +125,7 @@
     } else if (isEnd || isHoverTempEnd) {
       classes += (time < (sTime || 0) ? "bg-[#f38157] text-white rounded-l-md font-medium " : "bg-[#f38157] text-white rounded-r-md font-medium ");
     } else if (inRange || inTempRange) {
-      classes += "bg-[#422a22] text-[#d4d4d4] font-medium "; 
+      classes += "bg-[#422a22] text-[#d4d4d4] font-medium ";
     } else {
       classes += "hover:bg-[#2a2a2a] rounded-md ";
     }
@@ -130,9 +135,11 @@
   // --- DYNAMIC CHART GRANULARITY & SYNC ---
   let trendsGranularity = $state('Day');
   let channelGranularity = $state('Day');
-  let activeChannels = $state(['Subscriptions', 'Tips', 'Posts', 'Messages', 'Referrals', 'Streams']);
-  let activePerfChannel = $state('All'); // For the Performance tab earnings chart
 
+  let activeChannels = $state(['Subscriptions', 'Tips', 'Posts', 'Messages', 'Referrals', 'Streams']);
+  let activePerfChannel = $state('All');
+
+  // For the Performance tab earnings chart
   const perfChannelColors: Record<string, string> = {
     'Subscriptions': '#3467FF', 'Tips': '#2AD4AC', 'Posts': '#FF6868',
     'Messages': '#FFA553', 'Referrals': '#34C2FF', 'Streams': '#CA34FF'
@@ -148,9 +155,11 @@
     if (granularity === 'Week') return ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
     if (granularity === 'Month') return shortMonthNames;
     if (!startDate || !endDate) return ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    
     let cats = [];
     let curr = new Date(Math.min(startDate.getTime(), endDate.getTime()));
     const end = new Date(Math.max(startDate.getTime(), endDate.getTime()));
+    
     while(curr <= end) {
       cats.push(shortFormatter.format(curr));
       curr.setDate(curr.getDate() + 1);
@@ -177,6 +186,7 @@
   function getDist(key: string, days: number) {
     const fullKey = `${key}_${days}`;
     if (baseDistributions[fullKey] && baseDistributions[fullKey].length === days) return baseDistributions[fullKey];
+    
     const dist = Array.from({ length: days }, () => Math.random() * 10 + 1);
     baseDistributions[fullKey] = dist;
     return dist;
@@ -186,6 +196,7 @@
     const dist = getDist('trends', chartDaysCount);
     const distSum = dist.reduce((a, b) => a + b, 0);
     if (distSum === 0 || total === 0) return dist.map(() => 0);
+    
     const data = dist.map(p => parseFloat((total * (p / distSum)).toFixed(2)));
     if (data.length > 0) {
       const sumWithoutLast = data.slice(0, -1).reduce((a, b) => a + b, 0);
@@ -199,7 +210,9 @@
     const activeTotal = activePerfChannel === 'All' ? total : vals[activePerfChannel as keyof typeof vals];
     const dist = getDist(`perf_${activePerfChannel}`, chartDaysCount); // Reuse chartDaysCount for simplicity
     const distSum = dist.reduce((a, b) => a + b, 0);
+    
     if (distSum === 0 || activeTotal === 0) return dist.map(() => 0);
+    
     const data = dist.map(p => parseFloat((activeTotal * (p / distSum)).toFixed(2)));
     if (data.length > 0) {
       const sumWithoutLast = data.slice(0, -1).reduce((a, b) => a + b, 0);
@@ -220,10 +233,13 @@
     return channels.map(ch => {
       const dist = getDist(`ch_${ch.name}`, channelDaysCount);
       const distSum = dist.reduce((a, b) => a + b, 0);
+      
       if (distSum === 0 || ch.val === 0) return { name: ch.name, color: ch.color, data: dist.map(() => 0) };
+      
       const data = dist.map(p => parseFloat((ch.val * (p / distSum)).toFixed(2)));
       const sumWithoutLast = data.slice(0, -1).reduce((a, b) => a + b, 0);
       data[data.length - 1] = parseFloat(Math.max(0, ch.val - sumWithoutLast).toFixed(2));
+      
       return { name: ch.name, color: ch.color, data };
     });
   });
@@ -244,7 +260,9 @@
   let perfEarningsChart: HighchartsType.Chart | null = null;
   let perfDonutChart: HighchartsType.Chart | null = null;
   let perfSparklineCharts: HighchartsType.Chart[] = [];
+  
   let chartReady = $state(false);
+  let isDragging = false; // --- DRAG FIX FLAG ---
 
   // Performance Breakdown Legend config
   const perfBreakdownConfig = [
@@ -293,6 +311,13 @@
     else target.innerText = stats.refunded.toFixed(2);
   }
 
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === 'Escape') {
+      event.preventDefault();
+      (event.currentTarget as HTMLElement).blur();
+    }
+  }
+
   function resetAll() {
     vals = JSON.parse(JSON.stringify(defaultVals));
     stats = { creators: 0, refunded: 0.00 };
@@ -325,11 +350,16 @@
               dragDrop: { draggableY: true, dragMinY: 0 },
               point: {
                 events: {
+                  // --- ADD DRAG START FIX ---
+                  dragStart: function() {
+                    isDragging = true;
+                  },
                   drag: function(e: any) {
                     let newVal = Math.max(0, e.newValues ? e.newValues.y : e.target.y);
                     const currentData = [...trendsData];
                     currentData[e.target.index] = newVal;
                     const newTotal = currentData.reduce((a, b) => a + b, 0);
+                    
                     baseDistributions[`trends_${chartDaysCount}`] = currentData;
                     
                     if (total > 0 && newTotal > 0) {
@@ -341,11 +371,15 @@
                       vals.Referrals = parseFloat((vals.Referrals * ratio).toFixed(2));
                       vals.Streams = parseFloat(Math.max(0, newTotal - (vals.Subscriptions + vals.Tips + vals.Posts + vals.Messages + vals.Referrals)).toFixed(2));
                     }
+                  },
+                  // --- ADD DROP FIX ---
+                  drop: function() {
+                    isDragging = false;
                   }
                 }
               }
             },
-            column: { color: '#c4623e', borderRadius: 2, cursor: 'ns-resize', pointPadding: 0.1, groupPadding: 0.1 }
+            column: { color: '#c4623e', borderRadius: 8, cursor: 'ns-resize', pointPadding: 0.1, groupPadding: 0.1 }
           },
           tooltip: { backgroundColor: 'rgba(0,0,0,0.85)', style: { color: '#fff' }, borderWidth: 0, pointFormat: '<b>${point.y:.2f}</b>' },
           series: [{ type: 'column', name: 'Earnings', data: trendsData, showInLegend: false }],
@@ -457,10 +491,13 @@
       if (trendsChart?.series?.[0]) {
         trendsChart.xAxis[0].setCategories(chartCategories, false);
         const current = trendsChart.series[0].yData || [];
-        if (trendsData.some((v, i) => current[i] !== v) || trendsData.length !== current.length) {
+        
+        // --- APPLY DATA ONLY IF NOT DRAGGING ---
+        if (!isDragging && (trendsData.some((v, i) => current[i] !== v) || trendsData.length !== current.length)) {
           trendsChart.series[0].setData([...trendsData], true, false, false);
         }
       }
+      
       if (channelChart) {
         channelChart.xAxis[0].setCategories(channelCategories, false);
         channelSeriesData.forEach((series, i) => {
@@ -471,6 +508,7 @@
         });
         channelChart.redraw(false);
       }
+      
       if (breakdownChart?.series?.[0]) breakdownChart.series[0].setData([...overviewBreakdownData], true, false, false);
 
       // Performance Updates
@@ -479,8 +517,9 @@
         perfEarningsChart.series[0].update({ color: activePerfChannel === 'All' ? '#3467FF' : perfChannelColors[activePerfChannel] }, false);
         perfEarningsChart.series[0].setData([...perfEarningsData], true, false, false);
       }
+      
       if (perfDonutChart?.series?.[0]) perfDonutChart.series[0].setData([...perfBreakdownData], true, false, false);
-
+      
       // Simple pseudo-random update for sparklines just to look active
       perfSparklineCharts.forEach((chart, i) => {
         const conf = perfBreakdownConfig[i];
@@ -540,10 +579,10 @@
                 <div class="w-[230px] flex flex-col">
                   <div class="flex justify-between items-center mb-4">
                     {#if offset === 0}
-                      <div class="flex gap-1.5">
+                       <div class="flex gap-1.5">
                         <button class="w-7 h-7 bg-[#262626] hover:bg-[#333] rounded flex items-center justify-center text-[#9a9a9a]" onclick={() => navigateCalendar(-12)}>&laquo;</button>
                         <button class="w-7 h-7 bg-[#262626] hover:bg-[#333] rounded flex items-center justify-center text-[#9a9a9a]" onclick={() => navigateCalendar(-1)}>&lsaquo;</button>
-                      </div>
+                       </div>
                     {:else}<div class="w-[62px]"></div>{/if}
                     <div class="text-[14px] font-semibold text-white">{shortMonthNames[mMonth]} {mYear}</div>
                     {#if offset === 1}
@@ -551,7 +590,7 @@
                         <button class="w-7 h-7 bg-[#262626] hover:bg-[#333] rounded flex items-center justify-center text-[#9a9a9a]" onclick={() => navigateCalendar(1)}>&rsaquo;</button>
                         <button class="w-7 h-7 bg-[#262626] hover:bg-[#333] rounded flex items-center justify-center text-[#9a9a9a]" onclick={() => navigateCalendar(12)}>&raquo;</button>
                       </div>
-                    {:else}<div class="w-[62px]"></div>{/if}
+                   {:else}<div class="w-[62px]"></div>{/if}
                   </div>
                   <div class="grid grid-cols-7 mb-2 text-center text-[12px] text-[#8a8a8a]"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
                   <div class="grid grid-cols-7 gap-y-1 justify-items-center">
@@ -763,7 +802,7 @@
           <thead>
             <tr class="border-b border-[#242424]">
                {#each ['Creator', 'Total subscription earnings', 'Tips', 'Message', 'Engagement earnings ratio', 'Total earnings', 'Contribution %', 'OF ranking', 'Fans with renew on', 'Profile visitors', 'New subscribers', 'Subscriber renewals', 'New subscriber conversion', 'Active fans', 'Number of spenders', 'Avg spend per spender', 'Avg earnings per fan', 'Reply time', 'Fans chatted', 'Messages sent', 'PPVs sent'] as th, i}
-                  <th class="bg-[#151515] text-[#b9b9b9] text-[12.5px] font-medium text-left px-[13px] py-[10px] whitespace-nowrap cursor-pointer hover:bg-[#2a2522] {i === 0 ? 'sticky left-0 z-10 border-r border-[#242424]' : ''} {i === 5 ? 'bg-[#262626]' : ''}">
+                 <th class="bg-[#151515] text-[#b9b9b9] text-[12.5px] font-medium text-left px-[13px] py-[10px] whitespace-nowrap cursor-pointer hover:bg-[#2a2522] {i === 0 ? 'sticky left-0 z-10 border-r border-[#242424]' : ''} {i === 5 ? 'bg-[#262626]' : ''}">
                     <div class="flex items-center gap-[6px] w-full">
                        {th}
                        {#if th.includes('UTC')} <span class="bg-[#2e2e2e] text-[#9a9a9a] text-[10px] font-medium px-[6px] py-[1.5px] rounded-md mx-1">UTC+00:00</span> {/if}
@@ -773,7 +812,7 @@
                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                        </div>
                     </div>
-                  </th>
+                 </th>
                {/each}
             </tr>
           </thead>
@@ -834,21 +873,21 @@
                 <div bind:this={perfDonutContainer} class="w-[146px] h-[146px] shrink-0"></div>
                 <div class="flex flex-col gap-[10px] w-full mt-2">
                   {#each perfBreakdownConfig as leg}
-                    <div class="flex flex-col">
+                     <div class="flex flex-col">
                       <div class="text-[12px] text-[#8a8a8a] mb-1">{leg.n}</div>
                       <div class="flex items-center">
                         <span class="w-2 h-2 rounded-full mr-2" style="background:{leg.c}"></span>
                         <span class="text-[15px] font-bold text-white font-['Suisse_Intl_Mono'] min-w-[65px]">${vals[leg.k as keyof typeof vals].toFixed(1)}</span>
                         <span class="text-[11px] text-[#8a8a8a] font-medium">{calcPct(vals[leg.k as keyof typeof vals])}%</span>
                       </div>
-                    </div>
+                     </div>
                   {/each}
                 </div>
              </div>
 
              <div class="bg-[#151515] rounded-[12px] p-[17px] border border-[#242424] flex flex-col justify-between">
                 {#each perfBreakdownConfig as leg, i}
-                  <div class="flex items-center justify-between mb-3 last:mb-0">
+                   <div class="flex items-center justify-between mb-3 last:mb-0">
                     <div class="flex flex-col w-[120px]">
                       <div class="flex items-center gap-2 text-[15px] font-bold text-white font-['Suisse_Intl_Mono']">
                         ${vals[leg.k as keyof typeof vals].toFixed(1)}
@@ -859,7 +898,7 @@
                       </div>
                       <div class="text-[12px] text-[#8a8a8a]">{leg.n}</div>
                     </div>
-                    <div bind:this={perfSparklineContainers[i]} class="w-[158px] h-[30px]"></div>
+                     <div bind:this={perfSparklineContainers[i]} class="w-[158px] h-[30px]"></div>
                   </div>
                 {/each}
              </div>
@@ -879,7 +918,7 @@
                 <span class="text-[12px] text-[#e8e8e8] font-['Suisse_Intl']">3</span>
              </div>
           </div>
-        </div>
+         </div>
 
         <div>
           <div class="flex items-center gap-[7px] mb-3">
