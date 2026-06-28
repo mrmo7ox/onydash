@@ -54,50 +54,118 @@
     employees: false
   });
 
+  // State to hold notification counts for each platform
+  let platformCounts = $state({
+    onlyfans: 0,
+    fansly: 0,
+    mym: 0,
+    fanvue: 0
+  });
+
+  // State for Messages Pro count and edit mode
+  let messagesProCount = $state(0);
+  let isEditingMsgCount = $state(false);
+
+  // Platforms data array
+  const platforms = [
+    { id: 'onlyfans', name: 'OnlyFans', icon: ofMenuIcon, beta: false },
+    { id: 'fansly', name: 'Fansly', icon: fanslyIcon, beta: false },
+    { id: 'mym', name: 'MYM', icon: mymIcon, beta: false },
+    { id: 'fanvue', name: 'Fanvue', icon: fanvuIcon, beta: true }
+  ];
+
+  // Derived state to get the currently selected platform's data
+  let currentPlatformData = $derived(platforms.find(p => p.id === selectedPlatform) || platforms[0]);
+
+  // Local Storage syncing logic
+  let initialized = false;
+  $effect(() => {
+    if (typeof window !== 'undefined') {
+      if (!initialized) {
+        // Read from local storage on mount
+        const storedCounts = localStorage.getItem('platformCounts');
+        if (storedCounts) {
+          try {
+            Object.assign(platformCounts, JSON.parse(storedCounts));
+          } catch (e) {}
+        }
+        
+        const storedPlatform = localStorage.getItem('selectedPlatform');
+        if (storedPlatform) {
+          selectedPlatform = storedPlatform;
+        }
+
+        const storedMsgPro = localStorage.getItem('messagesProCount');
+        if (storedMsgPro) {
+          messagesProCount = parseInt(storedMsgPro, 10) || 0;
+        }
+        
+        initialized = true;
+      } else {
+        // Save to local storage whenever counts or selected platform change
+        localStorage.setItem('platformCounts', JSON.stringify(platformCounts));
+        localStorage.setItem('selectedPlatform', selectedPlatform);
+        localStorage.setItem('messagesProCount', messagesProCount.toString());
+      }
+    }
+  });
+
   function toggleMenu(menu: keyof typeof openMenus) {
     openMenus[menu] = !openMenus[menu];
   }
+
+  function closeDropdowns() {
+    isPlatformPickerOpen = false;
+  }
 </script>
 
-<div class="bg-black w-[250px] h-[calc(100vh-48px)] pt-[7px] pr-[7px] pb-[26px] pl-[9px] flex flex-col justify-between items-center gap-y-[35px] overflow-y-auto [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#666] [&::-webkit-scrollbar-thumb]:rounded-[10px] font-['Calibri',sans-serif]">
+<svelte:document onclick={closeDropdowns} />
+
+<div class="bg-black w-[250px] h-[calc(100vh-48px)] pt-[7px] pr-[7px] pb-[26px] pl-[9px] flex flex-col justify-between items-center gap-y-[35px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] font-['Calibri',sans-serif]">
   <div class="w-full">
     <ul class="w-full flex flex-col m-0 p-0 list-none">
+      
       <li class="relative z-10 mb-[30px]">
         <button
           type="button"
-          class="relative w-full font-['Inter',sans-serif] text-white pl-[18px] py-[15px] bg-[#171717]/80 flex items-center text-[16px] leading-[22px] border-0 rounded-[10px] font-bold cursor-pointer hover:bg-[#0e0e0e]"
-          onclick={() => isPlatformPickerOpen = !isPlatformPickerOpen}
+          class="relative w-full font-['Inter',sans-serif] text-white pl-[18px] pr-[40px] py-[15px] bg-[#171717]/80 flex items-center text-[16px] leading-[22px] border-0 rounded-[10px] font-bold cursor-pointer hover:bg-[#0e0e0e] after:content-[''] after:absolute after:right-[12px] after:top-1/2 after:-translate-y-1/2 after:w-[1.2em] after:h-[1.2em] after:bg-current after:[mask:url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201024%201024%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M487.456%20613.6l24.128%2024.128%20193.12-193.12-24.128-24.128-168.992%20168.992-168.192-168.192-24.128%2024.128%2096.416%2096.416z%22/%3E%3C/svg%3E')_center/contain_no-repeat] after:text-[#d6d9df] after:transition-all after:duration-400"
+          onclick={(e) => {
+            e.stopPropagation();
+            isPlatformPickerOpen = !isPlatformPickerOpen;
+          }}
         >
-          <img src={ofMenuIcon} class="w-[19px] h-[19px] object-contain mr-[8px]" alt="">
-          Onlyfans
-          <span class="absolute right-[40px] w-[11px] h-[11px] bg-[#fb609f] rounded-full top-1/2 -translate-y-1/2"></span>
+          <img src={currentPlatformData.icon} class="w-[19px] h-[19px] object-contain mr-[8px]" alt="">
+          {currentPlatformData.name}
+          
+          <span class="absolute right-[40px] w-[11px] h-[11px] bg-[#fb609f] rounded-full top-1/2 -translate-y-1/2 inline-block"></span>
         </button>
 
         {#if isPlatformPickerOpen}
           <div class="absolute left-[-9px] top-[100%] min-w-full w-[max(100%,253px)] bg-[#171717] rounded-[8px] p-[10px] z-[2000] shadow-[0_10px_28px_rgba(0,0,0,0.45)] mt-1">
             <ul class="m-0 p-0 list-none flex flex-col">
-              {#each [
-                { id: 'onlyfans', name: 'OnlyFans', icon: ofMenuIcon, count: 0 },
-                { id: 'fansly', name: 'Fansly', icon: fanslyIcon, count: 0 },
-                { id: 'mym', name: 'MYM', icon: mymIcon, count: 0 },
-                { id: 'fanvue', name: 'Fanvue', icon: fanvuIcon, count: 0, beta: true }
-              ] as platform}
+              {#each platforms as platform}
                 <li
-                  class="flex items-center gap-[10px] py-[6px] pl-[6px] pr-[14px] text-white cursor-pointer text-[16px] leading-[1.2] hover:bg-[#a3583e] hover:rounded-[8px] {selectedPlatform === platform.id ? '' : ''}"
-                  onclick={() => { selectedPlatform = platform.id; isPlatformPickerOpen = false; }}
+                  class="flex items-center gap-[10px] py-[6px] pl-[6px] pr-[14px] text-white cursor-pointer text-[16px] leading-[1.2] hover:bg-[#a3583e] hover:rounded-[8px] mb-0"
+                  onclick={(e) => { 
+                    e.stopPropagation();
+                    selectedPlatform = platform.id; 
+                    isPlatformPickerOpen = false; 
+                  }}
                 >
-                  <span class="w-[23px] h-[24px] shrink-0 inline-flex items-center justify-center transition-opacity {selectedPlatform === platform.id ? 'opacity-100' : 'opacity-0'}">
+                  <span class="w-[23px] h-[24px] shrink-0 inline-flex items-center justify-center transition-opacity duration-200 {selectedPlatform === platform.id ? 'opacity-100' : 'opacity-0'}">
                     <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M6 12.3L9.4 15.7L17.5 7.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                   </span>
-                  <img class="shrink-0 object-contain rounded-[4px] w-[19px] h-[19px]" src={platform.icon} alt="">
-                  <span class="grow shrink min-w-0 font-normal font-['Inter']">{platform.name}</span>
+                  <img class="w-[22px] h-[22px] shrink-0 object-contain rounded-[4px]" src={platform.icon} alt="">
+                  <span class="grow shrink basis-0 min-w-0 font-normal font-['Inter']">{platform.name}</span>
                   <span class="inline-flex items-center gap-[8px] shrink-0">
                     {#if platform.beta}
                       <span class="inline-flex items-center justify-center py-[1px] px-[5px] text-[15px] leading-none text-[#b2b2b2] bg-[#666666] rounded-[10px] font-medium mr-[5px]">Beta</span>
                     {/if}
-                    <span class="min-w-[20px] h-[20px] px-[7px] rounded-[11px] bg-[#fb609f] text-white text-[12px] font-medium inline-flex items-center justify-center shrink-0">{platform.count}</span>
+                    <span class="min-w-[20px] h-[20px] px-[7px] rounded-[11px] bg-[#fb609f] text-white text-[12px] font-medium inline-flex items-center justify-center shrink-0">
+                      {platformCounts[platform.id]}
+                    </span>
                   </span>
                 </li>
               {/each}
@@ -159,10 +227,10 @@
           <div class="mt-[5px]">
             <ul class="m-0 p-0 list-none flex flex-col">
               {#each [
-                { name: 'Creator reports', icon: creatorIcon, link: 'https://xn--nfloww-vva.com/app/creator.html' },
-                { name: 'Employee reports', icon: personIcon, link: 'https://xn--nfloww-vva.com/app/employee-reports.html' },
-                { name: 'Fan reports', icon: fanIcon, link: 'https://xn--nfloww-vva.com/app/fan-reports.html' },
-                { name: 'Message dashboard', icon: messageDashboardIcon, link: '#' }
+                { name: 'Creator reports', icon: creatorIcon, link: '/creator' },
+                { name: 'Employee reports', icon: personIcon, link: '/employee-reports' },
+                { name: 'Fan reports', icon: fanIcon, link: '/fan-reports' },
+                { name: 'Message dashboard', icon: messageDashboardIcon, link: '/message-dashboard' }
               ] as item}
                 <li>
                   <a href={item.link} class="flex items-center w-full py-[10px] pl-[25px] pr-[10px] font-['Inter',sans-serif] text-[16px] leading-[22px] text-[#9e9e9e] rounded-[10px] font-bold no-underline transition-all duration-400 ease-in hover:bg-[#262e43] hover:text-white">
@@ -178,8 +246,35 @@
       <li class="mb-[5px]">
         <a href="#" class="relative flex items-center w-full py-[10px] px-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] text-[#9e9e9e] rounded-[10px] font-bold no-underline hover:bg-[#0e0e0e] hover:text-white transition-colors">
           <img src={messagesProIcon} class="w-[19px] h-[19px] object-contain mr-[8px]" alt=""> Messages Pro
-          <span class="absolute right-[42px] w-[15px] h-[15px] text-center rounded-full bg-[#fb609f] text-white text-[12px] leading-[1.4] top-[13px] font-normal">0</span>
-          <img src={messagesProRightIcon} class="absolute w-[26px] h-[26px] right-0 block" alt="">
+          
+          {#if isEditingMsgCount}
+            <input 
+              type="number" 
+              bind:value={messagesProCount} 
+              class="absolute right-[40px] w-[35px] h-[18px] text-center rounded-[10px] bg-[#fb609f] text-white text-[12px] font-normal outline-none border-0 top-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              autofocus
+              onblur={() => isEditingMsgCount = false}
+              onclick={(e) => e.stopPropagation()}
+              onkeydown={(e) => {
+                if (e.key === 'Enter' || e.key === 'Escape') {
+                  isEditingMsgCount = false;
+                }
+              }}
+            />
+          {:else}
+            <span 
+              class="absolute right-[42px] px-[5px] min-w-[15px] h-[15px] flex items-center justify-center rounded-full bg-[#fb609f] text-white text-[12px] leading-[1.4] top-[13px] font-normal cursor-pointer hover:scale-110 transition-transform"
+              onclick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                isEditingMsgCount = true;
+              }}
+            >
+              {messagesProCount}
+            </span>
+          {/if}
+
+          <img src={messagesProRightIcon} class="mr-2 absolute w-[26px] h-[26px] right-0 block" alt="">
         </a>
       </li>
 
@@ -245,7 +340,7 @@
         {/if}
       </li>
 
-      <hr class="border-[#171717] opacity-100 my-4 border-t w-full">
+      <hr class="border-[#171717] opacity-100 my-[13px] border-t w-full">
 
       <li class="mb-[5px]">
         <button
@@ -259,7 +354,7 @@
           <div class="mt-[5px]">
             <ul class="m-0 p-0 list-none flex flex-col">
               {#each [
-                { name: 'Manage Creators', icon: creatorIcon, link: 'https://xn--nfloww-vva.com/app/manage-creators.html' },
+                { name: 'Manage Creators', icon: creatorIcon, link: '/manage-creators' },
                 { name: 'Custom proxy', icon: customProxyIcon, link: '#' }
               ] as item}
                 <li>
@@ -285,7 +380,7 @@
           <div class="mt-[5px]">
             <ul class="m-0 p-0 list-none flex flex-col">
               {#each [
-                { name: 'Manage employees', icon: personIcon, link: 'https://xn--nfloww-vva.com/app/employees.html' },
+                { name: 'Manage employees', icon: personIcon, link: '/employees' },
                 { name: 'Shift schedule', icon: shiftScheduleIcon, link: '#' }
               ] as item}
                 <li>

@@ -5,6 +5,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face { 
+    font-family: "Suisse Intl"; 
+    src: url("/fonts/SuisseIntl-Regular-WebS.woff2") format("woff2"), 
+         url("/fonts/SuisseIntl-Regular-WebS.woff") format("woff"); 
+    font-style: normal; 
+    font-weight: 400; 
+    font-display: swap; 
+}
+
+@font-face { 
+    font-family: "Suisse Intl"; 
+    src: url("/fonts/SuisseIntl-Medium-WebS.woff2") format("woff2"), 
+         url("/fonts/SuisseIntl-Medium-WebS.woff") format("woff"); 
+    font-style: normal; 
+    font-weight: 500; 
+    font-display: swap; 
+}
+
+@font-face { 
+    font-family: "Suisse Intl Mono"; 
+    src: url("/fonts/SuisseIntlMono-Regular-WebS.woff2") format("woff2"), 
+         url("/fonts/SuisseIntlMono-Regular-WebS.woff") format("woff"); 
+    font-style: normal; 
+    font-weight: 400; 
+    font-display: swap; 
+}
+
 @layer base {
   * {
     font-family: 'Calibri', sans-serif;

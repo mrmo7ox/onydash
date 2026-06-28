@@ -1,0 +1,1411 @@
+<style>
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13,110,253;
+  --bs-secondary-rgb: 108,117,125;
+  --bs-success-rgb: 25,135,84;
+  --bs-info-rgb: 13,202,240;
+  --bs-warning-rgb: 255,193,7;
+  --bs-danger-rgb: 220,53,69;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark-rgb: 33,37,41;
+  --bs-primary-text-emphasis: #052c65;
+  --bs-secondary-text-emphasis: #2b2f32;
+  --bs-success-text-emphasis: #0a3622;
+  --bs-info-text-emphasis: #055160;
+  --bs-warning-text-emphasis: #664d03;
+  --bs-danger-text-emphasis: #58151c;
+  --bs-light-text-emphasis: #495057;
+  --bs-dark-text-emphasis: #495057;
+  --bs-primary-bg-subtle: #cfe2ff;
+  --bs-secondary-bg-subtle: #e2e3e5;
+  --bs-success-bg-subtle: #d1e7dd;
+  --bs-info-bg-subtle: #cff4fc;
+  --bs-warning-bg-subtle: #fff3cd;
+  --bs-danger-bg-subtle: #f8d7da;
+  --bs-light-bg-subtle: #fcfcfd;
+  --bs-dark-bg-subtle: #ced4da;
+  --bs-primary-border-subtle: #9ec5fe;
+  --bs-secondary-border-subtle: #c4c8cb;
+  --bs-success-border-subtle: #a3cfbb;
+  --bs-info-border-subtle: #9eeaf9;
+  --bs-warning-border-subtle: #ffe69c;
+  --bs-danger-border-subtle: #f1aeb5;
+  --bs-light-border-subtle: #e9ecef;
+  --bs-dark-border-subtle: #adb5bd;
+  --bs-white-rgb: 255,255,255;
+  --bs-black-rgb: 0,0,0;
+  --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-body-color: #212529;
+  --bs-body-color-rgb: 33,37,41;
+  --bs-body-bg: #fff;
+  --bs-body-bg-rgb: 255,255,255;
+  --bs-emphasis-color: #000;
+  --bs-emphasis-color-rgb: 0,0,0;
+  --bs-secondary-color: rgba(33, 37, 41, 0.75);
+  --bs-secondary-color-rgb: 33,37,41;
+  --bs-secondary-bg: #e9ecef;
+  --bs-secondary-bg-rgb: 233,236,239;
+  --bs-tertiary-color: rgba(33, 37, 41, 0.5);
+  --bs-tertiary-color-rgb: 33,37,41;
+  --bs-tertiary-bg: #f8f9fa;
+  --bs-tertiary-bg-rgb: 248,249,250;
+  --bs-heading-color: inherit;
+  --bs-link-color: #0d6efd;
+  --bs-link-color-rgb: 13,110,253;
+  --bs-link-decoration: underline;
+  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color-rgb: 10,88,202;
+  --bs-code-color: #d63384;
+  --bs-highlight-color: #212529;
+  --bs-highlight-bg: #fff3cd;
+  --bs-border-width: 1px;
+  --bs-border-style: solid;
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-border-radius: 0.375rem;
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 0.5rem;
+  --bs-border-radius-xl: 1rem;
+  --bs-border-radius-xxl: 2rem;
+  --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+  --bs-border-radius-pill: 50rem;
+  --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  --bs-focus-ring-width: 0.25rem;
+  --bs-focus-ring-opacity: 0.25;
+  --bs-focus-ring-color: rgba(13, 110, 253, 0.25);
+  --bs-form-valid-color: #198754;
+  --bs-form-valid-border-color: #198754;
+  --bs-form-invalid-color: #dc3545;
+  --bs-form-invalid-border-color: #dc3545;
+  font-size: var(--bs-body-font-size);
+  text-align: var(--bs-body-text-align);
+  line-height: 1.3;
+  font-weight: 400;
+  color: white;
+  font-family: Roboto, sans-serif;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+* {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-family: Calibri, sans-serif;
+  box-sizing: border-box;
+}
+
+.fdinf-pill {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(35, 35, 35);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-top: 0px;
+  padding-right: 13px;
+  padding-bottom: 0px;
+  padding-left: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fdinf-pill-ghost {
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 142px;
+  box-sizing: border-box;
+}
+
+.fdinf-pill-ghost .fdinf-chev {
+  margin-left: auto;
+}
+
+.fdinf-pill .fdinf-ph {
+  font-size: 14px;
+  color: rgb(154, 154, 154);
+  font-weight: 400;
+  white-space-collapse: collapse;
+  text-wrap-mode: nowrap;
+}
+
+.fdinf-chev {
+  transition-behavior: normal;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: transform;
+}
+</style>
+
+<div class="fdinf-pill fdinf-pill-ghost" onclick="crnToggleMenu(event,'crnCreatorMenu')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="12" cy="10" r="3"></circle><path d="M6.5 20c.8-3 3-4.2 5.5-4.2s4.7 1.2 5.5 4.2"></path></svg>
+                                <span class="fdinf-ph">Creator</span>
+                                <svg class="fdinf-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                              </div>
+
+<style>
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13,110,253;
+  --bs-secondary-rgb: 108,117,125;
+  --bs-success-rgb: 25,135,84;
+  --bs-info-rgb: 13,202,240;
+  --bs-warning-rgb: 255,193,7;
+  --bs-danger-rgb: 220,53,69;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark-rgb: 33,37,41;
+  --bs-primary-text-emphasis: #052c65;
+  --bs-secondary-text-emphasis: #2b2f32;
+  --bs-success-text-emphasis: #0a3622;
+  --bs-info-text-emphasis: #055160;
+  --bs-warning-text-emphasis: #664d03;
+  --bs-danger-text-emphasis: #58151c;
+  --bs-light-text-emphasis: #495057;
+  --bs-dark-text-emphasis: #495057;
+  --bs-primary-bg-subtle: #cfe2ff;
+  --bs-secondary-bg-subtle: #e2e3e5;
+  --bs-success-bg-subtle: #d1e7dd;
+  --bs-info-bg-subtle: #cff4fc;
+  --bs-warning-bg-subtle: #fff3cd;
+  --bs-danger-bg-subtle: #f8d7da;
+  --bs-light-bg-subtle: #fcfcfd;
+  --bs-dark-bg-subtle: #ced4da;
+  --bs-primary-border-subtle: #9ec5fe;
+  --bs-secondary-border-subtle: #c4c8cb;
+  --bs-success-border-subtle: #a3cfbb;
+  --bs-info-border-subtle: #9eeaf9;
+  --bs-warning-border-subtle: #ffe69c;
+  --bs-danger-border-subtle: #f1aeb5;
+  --bs-light-border-subtle: #e9ecef;
+  --bs-dark-border-subtle: #adb5bd;
+  --bs-white-rgb: 255,255,255;
+  --bs-black-rgb: 0,0,0;
+  --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-body-color: #212529;
+  --bs-body-color-rgb: 33,37,41;
+  --bs-body-bg: #fff;
+  --bs-body-bg-rgb: 255,255,255;
+  --bs-emphasis-color: #000;
+  --bs-emphasis-color-rgb: 0,0,0;
+  --bs-secondary-color: rgba(33, 37, 41, 0.75);
+  --bs-secondary-color-rgb: 33,37,41;
+  --bs-secondary-bg: #e9ecef;
+  --bs-secondary-bg-rgb: 233,236,239;
+  --bs-tertiary-color: rgba(33, 37, 41, 0.5);
+  --bs-tertiary-color-rgb: 33,37,41;
+  --bs-tertiary-bg: #f8f9fa;
+  --bs-tertiary-bg-rgb: 248,249,250;
+  --bs-heading-color: inherit;
+  --bs-link-color: #0d6efd;
+  --bs-link-color-rgb: 13,110,253;
+  --bs-link-decoration: underline;
+  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color-rgb: 10,88,202;
+  --bs-code-color: #d63384;
+  --bs-highlight-color: #212529;
+  --bs-highlight-bg: #fff3cd;
+  --bs-border-width: 1px;
+  --bs-border-style: solid;
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-border-radius: 0.375rem;
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 0.5rem;
+  --bs-border-radius-xl: 1rem;
+  --bs-border-radius-xxl: 2rem;
+  --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+  --bs-border-radius-pill: 50rem;
+  --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  --bs-focus-ring-width: 0.25rem;
+  --bs-focus-ring-opacity: 0.25;
+  --bs-focus-ring-color: rgba(13, 110, 253, 0.25);
+  --bs-form-valid-color: #198754;
+  --bs-form-valid-border-color: #198754;
+  --bs-form-invalid-color: #dc3545;
+  --bs-form-invalid-border-color: #dc3545;
+  font-size: var(--bs-body-font-size);
+  text-align: var(--bs-body-text-align);
+  line-height: 1.3;
+  font-weight: 400;
+  color: white;
+  font-family: Roboto, sans-serif;
+}
+
+h2, h3 {
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  h2 { font-size: 2rem; }
+}
+
+@media (min-width: 1200px) {
+  h3 { font-size: 1.75rem; }
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+table {
+  caption-side: bottom;
+}
+
+tbody, th, thead, tr {
+  border-top-color: inherit;
+  border-right-color: inherit;
+  border-bottom-color: inherit;
+  border-left-color: inherit;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+}
+
+button {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  line-height: inherit;
+}
+
+button {
+  text-transform: none;
+}
+
+button {
+  appearance: button;
+}
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://fe-static-assets.infloww.com/font/SuisseIntl-Regular-WebS.woff2") format("woff2"), url("https://fe-static-assets.infloww.com/font/SuisseIntl-Regular-WebS.woff") format("woff"); font-style: normal; font-weight: 400; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://fe-static-assets.infloww.com/font/SuisseIntl-RegularItalic-WebS.woff2") format("woff2"), url("https://fe-static-assets.infloww.com/font/SuisseIntl-RegularItalic-WebS.woff") format("woff"); font-style: italic; font-weight: 400; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://fe-static-assets.infloww.com/font/SuisseIntl-Medium-WebS.woff2") format("woff2"), url("https://fe-static-assets.infloww.com/font/SuisseIntl-Medium-WebS.woff") format("woff"); font-style: normal; font-weight: 500; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://fe-static-assets.infloww.com/font/SuisseIntl-MediumItalic-WebS.woff2") format("woff2"), url("https://fe-static-assets.infloww.com/font/SuisseIntl-MediumItalic-WebS.woff") format("woff"); font-style: italic; font-weight: 500; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l Mono"; src: url("https://fe-static-assets.infloww.com/font/SuisseIntlMono-Regular-WebS.woff2") format("woff2"), url("https://fe-static-assets.infloww.com/font/SuisseIntlMono-Regular-WebS.woff") format("woff"); font-style: normal; font-weight: 400; font-display: swap; }
+
+body, button {
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://xn--nfloww-vva.com/app/SuisseIntl-Regular-WebS.woff2") format("woff2"), url("https://xn--nfloww-vva.com/app/SuisseIntl-Regular-WebS.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://xn--nfloww-vva.com/app/SuisseIntl-RegularItalic-WebS.woff2") format("woff2"), url("https://xn--nfloww-vva.com/app/SuisseIntl-RegularItalic-WebS.woff") format("woff"); font-weight: 400; font-style: italic; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://xn--nfloww-vva.com/app/SuisseIntl-Medium-WebS.woff2") format("woff2"), url("https://xn--nfloww-vva.com/app/SuisseIntl-Medium-WebS.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l"; src: url("https://xn--nfloww-vva.com/app/SuisseIntl-MediumItalic.woff2") format("woff2"), url("https://xn--nfloww-vva.com/app/SuisseIntl-MediumItalic.woff") format("woff"); font-weight: 500; font-style: italic; font-display: swap; }
+
+@font-face { font-family: "Suisse Int'l Mono"; src: url("https://xn--nfloww-vva.com/app/SuisseIntlMono-Regular-WebS.woff2") format("woff2"), url("https://xn--nfloww-vva.com/app/SuisseIntlMono-Regular-WebS.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+
+* {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-family: Calibri, sans-serif;
+  box-sizing: border-box;
+}
+
+h2, h3 {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  background-color: rgb(15, 14, 14);
+}
+
+.fdinf-chev {
+  transition-behavior: normal;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: transform;
+}
+
+.fdinf-sec-title {
+  display: flex;
+  align-items: center;
+  row-gap: 8px;
+  column-gap: 8px;
+  margin-top: 11px;
+  margin-right: 0px;
+  margin-bottom: 11px;
+  margin-left: 0px;
+  position: relative;
+  z-index: 1;
+}
+
+.fdinf-sec-title h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  font-family: Inter;
+}
+
+.fdinf-card {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(21, 21, 21);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.fdinf-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 84px;
+  padding-top: 24px;
+  padding-right: 0px;
+  padding-bottom: 24px;
+  padding-left: 0px;
+  row-gap: 24px;
+}
+
+.fdinf-tile {
+  padding-left: 22px;
+  min-width: 0px;
+}
+
+.fdinf-tile-h {
+  display: flex;
+  align-items: center;
+  row-gap: 7px;
+  column-gap: 7px;
+}
+
+.fdinf-tile-h span {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  white-space-collapse: collapse;
+  text-wrap-mode: nowrap;
+  font-family: Inter;
+}
+
+.fdinf-tile-val {
+  font-size: 32px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  margin-top: 9px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+  white-space-collapse: collapse;
+  text-wrap-mode: nowrap;
+  font-family: var(--font-family-suisse-intl-mono, "Suisse Int'l Mono"), monospace !important;
+}
+
+.fdinf-tile-val span[contenteditable] {
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.fdinf-summary .fdinf-tile-val:focus-within { color: rgba(219, 252, 84, 0.2); }
+
+.fdinf-summary .fdinf-tile-val span[contenteditable]:focus { color: rgb(45, 116, 255); box-shadow: rgba(219, 252, 84, 0.2) 0px 0px 0px 2px; border-radius: 4px; padding: 0px 2px; }
+
+.fdinf-tile-delta {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  row-gap: 3px;
+  column-gap: 3px;
+  line-height: 1;
+  font-family: var(--font-family-suisse-intl, "Suisse Int'l"), monospace !important;
+}
+
+.fdinf-tile-delta .up {
+  color: rgb(92, 168, 74);
+  font-family: var(--font-family-suisse-intl, "Suisse Int'l"), monospace !important;
+}
+
+.fdinf-tile-delta .pz {
+  color: rgb(232, 232, 232);
+  font-family: var(--font-family-suisse-intl, "Suisse Int'l"), monospace !important;
+}
+
+.fdinf-trends {
+  margin-top: 11px;
+  padding-top: 17px;
+  padding-right: 17px;
+  padding-bottom: 17px;
+  padding-left: 17px;
+}
+
+.fdinf-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fdinf-card-title {
+  display: flex;
+  align-items: center;
+  row-gap: 7px;
+  column-gap: 7px;
+}
+
+.fdinf-card-title h3, .fdinf-breakdown h3 {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  font-family: Inter;
+}
+
+.fdinf-seg {
+  display: flex;
+  align-items: center;
+  row-gap: 5px;
+  column-gap: 5px;
+}
+
+.fdinf-seg button {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(138, 138, 138);
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: transparent;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-top-color: currentcolor;
+  border-right-color: currentcolor;
+  border-bottom-color: currentcolor;
+  border-left-color: currentcolor;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  cursor: pointer;
+  font-family: inherit;
+  transition-behavior: normal;
+  transition-duration: 0.12s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: color;
+}
+
+.fdinf-seg button:hover { color: rgb(201, 201, 201); }
+
+.fdinf-seg button.active {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(42, 42, 42);
+  color: rgb(255, 255, 255);
+}
+
+.fdinf-chart-wrap {
+  height: 235px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.fdinf-chart-wrap canvas {
+  cursor: default;
+}
+
+#earningsTrendsChart {
+  cursor: ns-resize;
+}
+
+.fdinf-row2 {
+  display: grid;
+  grid-template-columns: minmax(0px, 1fr) 320px;
+  row-gap: 12px;
+  column-gap: 12px;
+  margin-top: 11px;
+  align-items: stretch;
+}
+
+.fdinf-channel {
+  padding-top: 17px;
+  padding-right: 17px;
+  padding-bottom: 17px;
+  padding-left: 17px;
+  min-width: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.fdinf-channel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+}
+
+.fdinf-channels-btn {
+  display: flex;
+  align-items: center;
+  row-gap: 7px;
+  column-gap: 7px;
+  height: 30px;
+  padding-top: 0px;
+  padding-right: 11px;
+  padding-bottom: 0px;
+  padding-left: 11px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(35, 35, 35);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fdinf-channels-btn span {
+  font-size: 12.5px;
+  color: rgb(232, 232, 232);
+  font-weight: 500;
+}
+
+.fdinf-chart-wrap-ch {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  min-height: 162px;
+  height: auto;
+}
+
+.fdinf-breakdown {
+  padding-top: 17px;
+  padding-right: 17px;
+  padding-bottom: 17px;
+  padding-left: 17px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.fdinf-donut-wrap {
+  height: 124px;
+  position: relative;
+  margin-top: 6px;
+  margin-right: auto;
+  margin-bottom: 4px;
+  margin-left: auto;
+  width: 124px;
+}
+
+.fdinf-bd-legend {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  column-gap: 4px;
+}
+
+.fdinf-bd-legend .cr-legend {
+  display: flex;
+  align-items: center;
+  height: 19px;
+}
+
+.fdinf-bd-legend .dot {
+  width: 7px;
+  height: 7px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 9px;
+}
+
+.fdinf-bd-legend .name {
+  font-size: 14px;
+  color: rgb(201, 201, 201);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+.fdinf-bd-legend .pct {
+  font-size: 11px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  margin-right: 14px;
+  min-width: 54px;
+  text-align: right;
+  font-family: "Suisse Int'l";
+}
+
+.fdinf-bd-legend .val {
+  font-size: 11px;
+  color: rgb(255, 255, 255);
+  min-width: 56px;
+  text-align: right;
+  font-family: var(--font-family-suisse-intl-mono, "Suisse Int'l Mono"), monospace !important;
+}
+
+.fdinf-stats-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.fdinf-stats-head h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+}
+
+.fdinf-export {
+  display: flex;
+  align-items: center;
+  row-gap: 7px;
+  column-gap: 7px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(31, 31, 31);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(44, 44, 44);
+  border-right-color: rgb(44, 44, 44);
+  border-bottom-color: rgb(44, 44, 44);
+  border-left-color: rgb(44, 44, 44);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-top: 6px;
+  padding-right: 11px;
+  padding-bottom: 6px;
+  padding-left: 11px;
+  font-size: 12.5px;
+  color: rgb(232, 232, 232);
+  font-weight: 400;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.fdinf-export:hover { background: rgb(38, 38, 38); }
+
+.fdinf-banner {
+  display: flex;
+  align-items: flex-start;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(0, 0, 0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-top: 10px;
+  padding-right: 14px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+  margin-top: 11px;
+}
+
+.fdinf-banner > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.fdinf-banner-lines {
+  font-size: 12.5px;
+  color: rgb(216, 216, 216);
+  line-height: 1.7;
+}
+
+.fdinf-utcbadge {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(46, 46, 46);
+  color: rgb(154, 154, 154);
+  font-size: 11px;
+  font-weight: 500;
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  border-bottom-left-radius: 999px;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  vertical-align: 1px;
+}
+
+.fdinf-statcards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 12px;
+  column-gap: 12px;
+  margin-top: 11px;
+}
+
+.fdinf-statcard {
+  padding-top: 15px;
+  padding-right: 17px;
+  padding-bottom: 18px;
+  padding-left: 17px;
+}
+
+.fdinf-sc-l {
+  display: flex;
+  align-items: center;
+  row-gap: 7px;
+  column-gap: 7px;
+}
+
+.fdinf-sc-l span {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+}
+
+.fdinf-sc-v {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  margin-top: 24px;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  white-space-collapse: collapse;
+  text-wrap-mode: nowrap;
+  font-family: var(--font-family-suisse-intl-mono, "Suisse Int'l Mono"), monospace !important;
+}
+
+.fdinf-sc-v span[contenteditable] {
+  outline-color: initial;
+  outline-style: none;
+  outline-width: initial;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.fdinf-custom-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  row-gap: 7px;
+  column-gap: 7px;
+  font-size: 12.5px;
+  color: rgb(232, 232, 232);
+  font-weight: 400;
+  margin-top: 11px;
+  margin-right: 2px;
+  margin-bottom: 9px;
+  margin-left: 0px;
+  cursor: pointer;
+}
+
+.fdinf-table-wrap {
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.fdinf-table-wrap::-webkit-scrollbar { height: 8px; }
+
+.fdinf-table-wrap::-webkit-scrollbar-thumb { background: rgb(61, 61, 61); border-radius: 4px; }
+
+.fdinf-table-wrap::-webkit-scrollbar-track { background: transparent; }
+
+table.fdinf-table {
+  border-collapse: collapse;
+  min-width: 100%;
+}
+
+table.fdinf-table th {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(21, 21, 21);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgb(185, 185, 185);
+  text-align: left;
+  padding-top: 8px;
+  padding-right: 13px;
+  padding-bottom: 8px;
+  padding-left: 13px;
+  white-space-collapse: collapse;
+  text-wrap-mode: nowrap;
+  cursor: pointer;
+  position: relative;
+}
+
+table.fdinf-table th:hover, table.fdinf-table th.fdinf-sorted { background: rgb(42, 37, 34); }
+
+table.fdinf-table th .fdinf-th {
+  display: flex;
+  align-items: center;
+  row-gap: 6px;
+  column-gap: 6px;
+  width: 100%;
+}
+
+table.fdinf-table th .fdinf-sort {
+  display: inline-flex;
+  flex-direction: column;
+  row-gap: 1.5px;
+  column-gap: 1.5px;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+table.fdinf-table th .fdinf-sort polyline {
+  stroke: rgb(106, 106, 106);
+}
+
+table.fdinf-table th .fdinf-sort.desc polyline:last-child {
+  stroke: rgb(255, 255, 255);
+}
+
+table.fdinf-table th:first-child {
+  position: sticky;
+  left: 0px;
+  z-index: 2;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(21, 21, 21);
+}
+
+.fdinf-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0px;
+  min-width: 200px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(31, 31, 31);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(46, 46, 46);
+  border-right-color: rgb(46, 46, 46);
+  border-bottom-color: rgb(46, 46, 46);
+  border-left-color: rgb(46, 46, 46);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 12px 32px;
+  padding-top: 6px;
+  padding-right: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  z-index: 60;
+}
+
+.fdinf-menu .fdinf-check {
+  display: flex;
+  align-items: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  color: rgb(232, 232, 232);
+}
+
+.fdinf-menu .fdinf-check:hover { background: rgb(42, 42, 42); }
+
+.fdinf-menu .fdinf-check .box {
+  width: 16px;
+  height: 16px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fdinf-menu .fdinf-check.on .box {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(243, 129, 87);
+  border-top-color: rgb(243, 129, 87);
+  border-right-color: rgb(243, 129, 87);
+  border-bottom-color: rgb(243, 129, 87);
+  border-left-color: rgb(243, 129, 87);
+}
+
+.fdinf-menu .fdinf-check.on .box::after { content: ""; width: 8px; height: 5px; border-left: 2px solid rgb(20, 20, 20); border-bottom: 2px solid rgb(20, 20, 20); transform: rotate(-45deg) translate(0.5px, -1px); }
+
+.fdinf-bd-legend .cr-legend {
+  margin-top: 0px !important;
+  margin-right: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0px !important;
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+  width: auto !important;
+}
+
+.fdinf-bd-legend .cr-legend .dot {
+  margin-top: 0px !important;
+}
+
+table.fdinf-table th {
+  border-left-width: medium !important;
+  border-left-style: none !important;
+  border-left-color: currentcolor !important;
+  border-right-width: medium !important;
+  border-right-style: none !important;
+  border-right-color: currentcolor !important;
+  box-shadow: none !important;
+}
+
+table.fdinf-table th::after, table.fdinf-table th::before { display: none !important; content: none !important; }
+
+table.fdinf-table thead {
+  background-image: initial !important;
+  background-position-x: initial !important;
+  background-position-y: initial !important;
+  background-size: initial !important;
+  background-repeat: initial !important;
+  background-attachment: initial !important;
+  background-origin: initial !important;
+  background-clip: initial !important;
+  background-color: transparent !important;
+}
+
+table.fdinf-table thead tr {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(36, 36, 36);
+}
+
+.fdinf-menu.hidden {
+  display: none;
+}
+</style>
+
+<div id="crnTabOverview">
+                        <!-- ============== EARNINGS SUMMARY ============== -->
+                        <div class="fdinf-sec-title">
+                          <h2>Earnings summary</h2>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                          
+                        </div>
+                        <div class="fdinf-card fdinf-summary">
+                          <!-- Row 1 -->
+                          <div class="fdinf-tile" data-crn-ch="total">
+                            <div class="fdinf-tile-h">
+                              <!-- <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M13.6 2.5c-4.4 0-8.2 2.9-9.4 7 1.5-1.2 3.4-1.9 5.4-1.9 4.8 0 8.7 3.9 8.7 8.7 0 .9-.1 1.8-.4 2.6 2.4-1.7 4-4.5 4-7.7 0-4.8-3.6-8.7-8.3-8.7z"></path><path d="M8.4 9.7c-2.7 0-5 1.6-6 3.9-.3.9-.5 1.8-.5 2.8 0 2.8 2.3 5.1 5.1 5.1 2.9 0 5.6-2.1 6.4-5 .1-.5.2-1 .2-1.5 0-2.9-2.3-5.3-5.2-5.3z"></path></svg> -->
+                              <img src="https://xn--nfloww-vva.com/app/index_files/of-active-icon.png" alt="Logo" style="width: 18px; height: 18px;">
+                              <span>Total earnings</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="total" inputmode="decimal" spellcheck="false">1,111.00</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="total"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <div class="fdinf-tile" data-crn-ch="Subscriptions">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+                              <span>Subscriptions</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Subscriptions" inputmode="decimal" spellcheck="false">55.55</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Subscriptions"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <div class="fdinf-tile" data-crn-ch="Posts">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V7.5z"></path><polyline points="15 2.5 15 7.5 20 7.5"></polyline></svg>
+                              <span>Posts</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Posts" inputmode="decimal" spellcheck="false">44.44</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Posts"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <div class="fdinf-tile" data-crn-ch="Messages">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+                              <span>Messages</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Messages" inputmode="decimal" spellcheck="false">911.02</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Messages"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <!-- Row 2 (col 1 vide) -->
+                          <div class="fdinf-tile fdinf-tile-empty"></div>
+                          <div class="fdinf-tile" data-crn-ch="Tips">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M14.5 9.2c-.4-.8-1.4-1.4-2.5-1.4-1.4 0-2.5.9-2.5 2.1s1.1 1.8 2.5 2.1c1.4.3 2.5.9 2.5 2.1s-1.1 2.1-2.5 2.1c-1.1 0-2.1-.6-2.5-1.4"></path><line x1="12" y1="6.2" x2="12" y2="7.8"></line><line x1="12" y1="16.2" x2="12" y2="17.8"></line></svg>
+                              <span>Tips</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Tips" inputmode="decimal" spellcheck="false">88.88</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Tips"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <div class="fdinf-tile" data-crn-ch="Referrals">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20c.7-3.2 3-5 6-5 1.2 0 2.3.3 3.2.8"></path><path d="M14 17.5c2-.5 4-2.5 4.5-4.5"></path><polyline points="16 10.5 18.7 12.8 21 10"></polyline></svg>
+                              <span>Referrals</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Referrals" inputmode="decimal" spellcheck="false">11.11</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Referrals"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5CA84A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="3"></line><polyline points="9 3 21 3 21 15"></polyline></svg><span class="up">100.00%</span></div>
+                          </div>
+                          <div class="fdinf-tile" data-crn-ch="Streams">
+                            <div class="fdinf-tile-h">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2.5"></rect><path d="M15 10.5l6-3.5v10l-6-3.5"></path></svg>
+                              <span>Streams</span>
+                            </div>
+                            <div class="fdinf-tile-val">$<span contenteditable="true" data-crn-val="Streams" inputmode="decimal" spellcheck="false">0.00</span></div>
+                            <div class="fdinf-tile-delta" data-crn-delta="Streams"><span class="pz">0.00%</span></div>
+                          </div>
+                        </div>
+
+                        <!-- ============== EARNINGS TRENDS ============== -->
+                        <div class="fdinf-card fdinf-trends">
+                          <div class="fdinf-card-head">
+                            <div class="fdinf-card-title">
+                              <h3>Earnings trends</h3>
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            </div>
+                            <div class="fdinf-seg" id="crnSegTrends">
+                              <button data-gran="Shown by hour" onclick="crnSetGran('trends',this)">Hour</button>
+                              <button data-gran="Shown by day" class="active" onclick="crnSetGran('trends',this)">Day</button>
+                              <button data-gran="Shown by week" onclick="crnSetGran('trends',this)">Week</button>
+                              <button data-gran="Shown by month" onclick="crnSetGran('trends',this)">Month</button>
+                            </div>
+                          </div>
+                          <div class="fdinf-chart-wrap"><canvas id="earningsTrendsChart" style="display: block; box-sizing: border-box; height: 235px; width: 1577px;" width="1577" height="235"></canvas></div>
+                        </div>
+
+                        <!-- ============== EARNINGS BY CHANNEL + EARNINGS BREAKDOWN ============== -->
+                        <div class="fdinf-row2">
+                          <div class="fdinf-card fdinf-channel">
+                            <div class="fdinf-card-head">
+                              <div class="fdinf-card-title">
+                                <h3>Earnings by channel</h3>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                              </div>
+                            </div>
+                            <div class="fdinf-channel-toolbar">
+                              <div style="position:relative;">
+                                <div class="fdinf-channels-btn" onclick="crnToggleMenu(event,'crnChannelsMenu')">
+                                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9c9c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                                  <span>Channels</span>
+                                  <svg class="fdinf-chev" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                                <div id="crnChannelsMenu" class="fdinf-menu hidden"><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Subscriptions')"><span class="box"></span>Subscriptions</div><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Tips')"><span class="box"></span>Tips</div><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Posts')"><span class="box"></span>Posts</div><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Messages')"><span class="box"></span>Messages</div><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Referrals')"><span class="box"></span>Referrals</div><div class="fdinf-check on" onclick="crnToggleChannel(event, 'Streams')"><span class="box"></span>Streams</div></div>
+                              </div>
+                              <div class="fdinf-seg" id="crnSegChannel">
+                                <button data-gran="Shown by hour" onclick="crnSetGran('channel',this)">Hour</button>
+                                <button data-gran="Shown by day" class="active" onclick="crnSetGran('channel',this)">Day</button>
+                                <button data-gran="Shown by week" onclick="crnSetGran('channel',this)">Week</button>
+                                <button data-gran="Shown by month" onclick="crnSetGran('channel',this)">Month</button>
+                              </div>
+                            </div>
+                            <div class="fdinf-chart-wrap fdinf-chart-wrap-ch"><canvas id="earningsByChannelChart" style="display: block; box-sizing: border-box; height: 227px; width: 1245px;" width="1245" height="227"></canvas></div>
+                          </div>
+                          <div class="fdinf-card fdinf-breakdown">
+                            <h3>Earnings breakdown</h3>
+                            <div class="fdinf-donut-wrap"><canvas id="crnBreakdownChart" style="display: block; box-sizing: border-box; height: 124px; width: 124px;" height="124" width="124"></canvas></div>
+                            <div class="fdinf-bd-legend">
+                              <div class="cr-legend" data-crn-leg="Subscriptions"><span class="dot" style="background:#359AD1;"></span><span class="name">Subscription</span><span class="pct">5.00%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$55.55</span></div>
+                              <div class="cr-legend" data-crn-leg="Tips"><span class="dot" style="background:#5CA64C;"></span><span class="name">Tips</span><span class="pct">8.00%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$88.88</span></div>
+                              <div class="cr-legend" data-crn-leg="Posts"><span class="dot" style="background:#D46B43;"></span><span class="name">Posts</span><span class="pct">4.00%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$44.44</span></div>
+                              <div class="cr-legend" data-crn-leg="Messages"><span class="dot" style="background:#AB70D0;"></span><span class="name">Messages</span><span class="pct">82.00%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$911.02</span></div>
+                              <div class="cr-legend" data-crn-leg="Referrals"><span class="dot" style="background:#D1628C;"></span><span class="name">Referrals</span><span class="pct">1.00%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$11.11</span></div>
+                              <div class="cr-legend" data-crn-leg="Streams"><span class="dot" style="background:#DAA717;"></span><span class="name">Streams</span><span class="pct">0%</span><span class="val" contenteditable="true" inputmode="decimal" spellcheck="false">$0.00</span></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- ============== CREATOR STATISTICS ============== -->
+                        <div class="fdinf-stats-head">
+                          <h2>Creator statistics</h2>
+                          <button class="fdinf-export" onclick="crnExportCSV()">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8e8e8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Export
+                          </button>
+                        </div>
+                        <div class="fdinf-banner">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M21 4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4l3 4 3-4h4a2 2 0 0 0 2-2z"></path><circle cx="12" cy="6.6" r="1.4" fill="#141414"></circle><rect x="10.9" y="9.3" width="2.2" height="6.2" rx="1.1" fill="#141414"></rect></svg>
+                          <div class="fdinf-banner-lines">
+                            <div>•&nbsp;&nbsp;Percentage change is calculated based on the change in value in the selected time frame against the same time frame immediately before it.</div>
+                            <div>•&nbsp;&nbsp;Data marked with <span class="fdinf-utcbadge">UTC+00:00</span> is available in UTC+00:00 only, due to OnlyFans limitations</div>
+                          </div>
+                        </div>
+                        <div class="fdinf-statcards">
+                          <div class="fdinf-card fdinf-statcard">
+                            <div class="fdinf-sc-l"><span>Creators</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                            <div class="fdinf-sc-v" data-crn-stat="creators">0</div>
+                          </div>
+                          <div class="fdinf-card fdinf-statcard">
+                            <div class="fdinf-sc-l"><span>Message earnings</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                            <div class="fdinf-sc-v">$<span contenteditable="true" data-crn-stat="msgEarnings" inputmode="decimal" spellcheck="false">911.02</span></div>
+                          </div>
+                          <div class="fdinf-card fdinf-statcard">
+                            <div class="fdinf-sc-l"><span>Total earnings</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                            <div class="fdinf-sc-v">$<span contenteditable="true" data-crn-stat="totalEarnings" inputmode="decimal" spellcheck="false">1,111.00</span></div>
+                          </div>
+                          <div class="fdinf-card fdinf-statcard">
+                            <div class="fdinf-sc-l"><span>Refunded</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                            <div class="fdinf-sc-v">$<span contenteditable="true" data-crn-stat="refunded" inputmode="decimal" spellcheck="false">0.00</span></div>
+                          </div>
+                        </div>
+                        <div class="fdinf-custom-metrics">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8e8e8" stroke-width="1.9" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line><circle cx="9" cy="8" r="2" fill="#171717"></circle><circle cx="15" cy="16" r="2" fill="#171717"></circle></svg>
+                          Custom metrics
+                        </div>
+                        <div class="fdinf-table-wrap" id="crnTableWrap">
+                          <table class="cr-table fdinf-table">
+                            <thead><tr id="crnTheadRow" data-built="1"><th onclick="crnSortBy(0, this)"><span class="fdinf-th">Creator<span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(1, this)"><span class="fdinf-th">Total subscription earnings<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(2, this)"><span class="fdinf-th">Tips<span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(3, this)"><span class="fdinf-th">Message<span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(4, this)"><span class="fdinf-th">Engagement earnings ratio<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th class="fdinf-sorted" onclick="crnSortBy(5, this)"><span class="fdinf-th">Total earnings<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort desc"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(6, this)"><span class="fdinf-th">Contribution %<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(7, this)"><span class="fdinf-th">OF ranking <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(8, this)"><span class="fdinf-th">Fans with renew on <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(9, this)"><span class="fdinf-th">Profile visitors <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(10, this)"><span class="fdinf-th">New subscribers <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(11, this)"><span class="fdinf-th">Subscriber renewals <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(12, this)"><span class="fdinf-th">New subscriber conversion <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(13, this)"><span class="fdinf-th">Active fans <span class="fdinf-utcbadge">UTC+00:00</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(14, this)"><span class="fdinf-th">Number of spenders<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(15, this)"><span class="fdinf-th">Avg spend per spender<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(16, this)"><span class="fdinf-th">Avg earnings per fan<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(17, this)"><span class="fdinf-th">Reply time<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(18, this)"><span class="fdinf-th">Fans chatted<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(19, this)"><span class="fdinf-th">Messages sent<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th><th onclick="crnSortBy(20, this)"><span class="fdinf-th">PPVs sent<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="fdinf-sort"><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,5 5,1 9,5" stroke-width="1.6"></polyline></svg><svg width="9" height="5" viewBox="0 0 10 6" fill="none"><polyline points="1,1 5,5 9,1" stroke-width="1.6"></polyline></svg></span></span></th></tr></thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+                        </div>
